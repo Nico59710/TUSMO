@@ -37,4 +37,23 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Mot secret :", motSecret);
 
     
+
+    Delete.addEventListener("click", function () {
+        cells[currentIndex - 1].textContent = "";
+        currentIndex--;
+    })
+
+    document.addEventListener("keydown", function (e) {
+        console.log(e.key);
+        allowCharacter = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m"]
+        if (allowCharacter.includes(e.key)) {
+            if (currentIndex < cells.length) {
+                cells[currentIndex].textContent = e.key;
+                currentIndex++;
+            }
+        } else if (e.key == "Backspace") {
+            cells[currentIndex - 1].textContent = "";
+            currentIndex--;
+        }
+    })
 })
