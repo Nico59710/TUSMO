@@ -6,13 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const grille = document.getElementById("grille");
     const clavier = document.getElementById("clavier");
     const bouttons = document.querySelectorAll(".button");
+    const lettres = document.querySelectorAll(".lettre");
+    const Delete = document.getElementById("Delete");
+    const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
     
    
     let currentIndex = 0;
 
-for (let index = 0; index < bouttons.length; index++) {
-    const element = bouttons[index];
+for (let index = 0; index < lettres.length; index++) {
+    const element = lettres[index];
 
     element.addEventListener("click", function () {
 
