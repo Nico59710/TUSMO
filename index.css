@@ -1,0 +1,56 @@
+
+body{
+    background: linear-gradient(165deg, #0a5a6e 0%, #084C61 35%, #063a4d 70%, #0d3340 100%);
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    justify-items: baseline;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.t, .o{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: red;
+    box-shadow: 3px 3px black;
+    width: 40px;
+    height: 40px;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.s{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 225, 0, 0.808);
+    box-shadow: 2px 2px black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#grille{
+display: grid;
+grid-template-columns: repeat(5, 70px);
+grid-template-rows: repeat(6, 70px);
+justify-content: center;
+}
+
+.cell{
+    border: 3px solid white;
+    box-shadow: 5px 5px black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
