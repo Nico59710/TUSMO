@@ -10,23 +10,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const Delete = document.getElementById("Delete");
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
-    
-   
+
+
     let currentIndex = 0;
 
-for (let index = 0; index < lettres.length; index++) {
-    const element = lettres[index];
+    for (let index = 0; index < lettres.length; index++) {
+        const element = lettres[index];
 
-    element.addEventListener("click", function () {
+        element.addEventListener("click", function () {
 
-        if (currentIndex < cells.length) {
-            cells[currentIndex].textContent = element.textContent;
-            currentIndex++;
-        }
+            if (currentIndex < cells.length) {
+                cells[currentIndex].textContent = element.textContent;
+                currentIndex++;
+            }
 
-    });
-}
-
-
+        });
+    }
+ 
+        Delete.addEventListener("click", function () {
+            cells[currentIndex - 1].textContent = "";
+            currentIndex--;
+        })
 
 })
