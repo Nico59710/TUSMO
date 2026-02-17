@@ -1,3 +1,15 @@
+* {
+    cursor: url("assets/cursor.cur") 16 16, auto;
+}
+
+a,
+button,
+.button,
+#Enter,
+#Delete {
+    cursor: url("assets/pointer.cur") 16 16, pointer;
+}
+
 body {
     background: linear-gradient(165deg, #0a5a6e 0%, #084C61 35%, #063a4d 70%, #0d3340 100%);
     display: flex;
