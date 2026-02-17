@@ -1,3 +1,5 @@
+import { mots5 } from "./mots5.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Document Chargé");
 
@@ -10,22 +12,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const Delete = document.getElementById("Delete");
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
-
-
+    
     let currentIndex = 0;
-
+    
     for (let index = 0; index < lettres.length; index++) {
         const element = lettres[index];
-
+        
         element.addEventListener("click", function () {
-
-            if (currentIndex < cells.length) {
+            
+            if (currentIndex < 5) {
                 cells[currentIndex].textContent = element.textContent;
                 currentIndex++;
             }
-
+            
         });
     }
+    Delete.addEventListener("click", function () {
+        cells[currentIndex - 1].textContent = "";
+        currentIndex--;
+    })     
+      
+    console.log(mots5);
+    const motSecret = mots5[Math.floor(Math.random() * mots5.length)];
+    console.log("Mot secret :", motSecret);
+
+    
 
     Delete.addEventListener("click", function () {
         cells[currentIndex - 1].textContent = "";
