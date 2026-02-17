@@ -95,8 +95,8 @@ h1 {
     font-weight: bold;
 }
 
-.Enter,
-.Delete {
+#Enter,
+#Delete {
     border: none;
     
 }
