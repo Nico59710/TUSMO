@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const cells = document.querySelectorAll(".cell");
     
     let currentIndex = 0;
+
+    console.log(mots5);
+    const motSecret = mots5[Math.floor(Math.random() * mots5.length)];
+    console.log("Mot secret :", motSecret);
     
     for (let index = 0; index < lettres.length; index++) {
         const element = lettres[index];
@@ -32,22 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
         currentIndex--;
     })     
       
-    console.log(mots5);
-    const motSecret = mots5[Math.floor(Math.random() * mots5.length)];
-    console.log("Mot secret :", motSecret);
-
-    
-
-    Delete.addEventListener("click", function () {
-        cells[currentIndex - 1].textContent = "";
-        currentIndex--;
-    })
-
     document.addEventListener("keydown", function (e) {
         console.log(e.key);
-        allowCharacter = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m"]
+       const allowCharacter = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m"]
         if (allowCharacter.includes(e.key)) {
-            if (currentIndex < cells.length) {
+            if (currentIndex < 5) {
                 cells[currentIndex].textContent = e.key;
                 currentIndex++;
             }
@@ -56,4 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
             currentIndex--;
         }
     })
+
+
+    
+
+  
+
 })
