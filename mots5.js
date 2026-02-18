@@ -1,7 +1,19 @@
 export const mots5 = [
-"avoir","etre","aussi","autre","apres","avant","faire","petit","grand","jeune",
+"avoir","aussi","autre","apres","avant","faire","petit","grand","jeune",
 "chose","place","homme","femme","venir","aller","donne","pense","porte","reste",
-"entre","cinq","coeur","suite","monde","arbre","livre","force","amour","ombre",
-"terre","blanc","noire","jaune","sucre","route","mieux","jouer","grave","geste",
-"bruit","roule","payer","salut","nuage","jambe"
-];
+"entre","coeur","table","pluie","suite","monde","arbre",
+"livre","force","amour","ombre","terre","blanc","noire","jaune",
+"rouge","sucre","route","mieux","jouer","grave","geste",
+"bruit","roule","payer","salut","nuage","jambe",
+"comme","entre","cette","etait","apres","paris","aussi","alors","ainsi","ville","notes","trois","monde","année",
+"titre","avant","deces","serie","avoir","temps","avait","place","debut","autre",
+"suite","faire","cours","leurs","album","ligne","moins","forme","grand",
+"selon","genre","situe","ayant","etant","coupe","scene","nomme",
+"celle","celui","sorti","ordre","armee","jours","reste","droit","point",
+"prend","siege","effet","toute","match","fille","avril","liste",
+"jeune","texte","route","maire","poste","corps","parti","grace",
+"roman","ecole","connu","elles","ecrit","porte","image","ouest",
+"livre","style","union","terme","petit","ligue","passe",
+"frere","donne","duree","films","comte","parmi","japon","objet",
+"cadre","musee","cause"
+]
