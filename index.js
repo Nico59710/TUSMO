@@ -43,33 +43,35 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     //fonction du boutton enter
 
+    let tentative = 0; // Variable pour suivre la ligne actuelle
     Enter.addEventListener("click", function () {
         // Ici, la logique pour vérifier le mot saisi par l'utilisateur
 
         if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false) {
             let motSaisi = "";
-            let tentative = 0; // Variable pour suivre la ligne actuelle
-            for (let i = 0; i < 5; i++) {                
-                motSaisi += cells[i+tentative].textContent;
+            for (let i = 0; i < 5; i++) {
+                motSaisi += cells[i + tentative].textContent;
                 console.log("mot saisi:", motSaisi);
                 if (motSaisi === motSecret) {
+                    cells[i + tentative].style.backgroundColor = "green";
                     console.log("Bravo ! Vous avez trouvé le mot secret.");
                     alert("Bravo ! Vous avez trouvé le mot secret.");
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-                    cells[i+tentative].style.backgroundColor = "green";
+                    cells[i + tentative].style.backgroundColor = "green";
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    cells[i+tentative].style.backgroundColor = "grey";
+                    cells[i + tentative].style.backgroundColor = "grey";
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    cells[i+tentative].style.backgroundColor = "yellow";
+                    cells[i + tentative].style.backgroundColor = "yellow";
                 }
+
             }
             tentative += 5; // Passer à la ligne suivante
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
-            
+
         } else {
             alert("Veuillez saisir un mot de 5 lettres avant de valider.");
         }
@@ -88,45 +90,46 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(e.key);
         const allowCharacter = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m", "w", "x", "c", "v", "b", "n"]
         if (allowCharacter.includes(e.key)) {
-            if (currentIndex < 5) {
+            if (currentIndex < cells.length && ligneValidee) {
                 cells[currentIndex].textContent = e.key;
                 currentIndex++;
+                if (currentIndex % 5 === 0) {
+                    ligneValidee = false;
+                }
             }
         } else if (e.key == "Backspace") {
             cells[currentIndex - 1].textContent = "";
             currentIndex--;
         } else if (e.key == "Enter") {
-            if (currentIndex === 5) {
+            if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false) {
                 let motSaisi = "";
                 for (let i = 0; i < 5; i++) {
-                    motSaisi += cells[i].textContent;
+                    motSaisi += cells[i + tentative].textContent;
                     console.log("mot saisi:", motSaisi);
                     if (motSaisi === motSecret) {
+                        cells[i + tentative].style.backgroundColor = "green";
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                     }
                     else if (motSecret[i] == motSaisi[i]) {
-                        cells[i].style.backgroundColor = "green";
+                        cells[i + tentative].style.backgroundColor = "green";
                     }
                     else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                        cells[i].style.backgroundColor = "grey";
+                        cells[i + tentative].style.backgroundColor = "grey";
                     }
                     else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                        cells[i].style.backgroundColor = "yellow";
+                        cells[i + tentative].style.backgroundColor = "yellow";
                     }
                 }
+                tentative += 5; // Passer à la ligne suivante
+                ligneValidee = true;// Réinitialiser pour la prochaine ligne
+                motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
             } else {
                 alert("Veuillez saisir un mot de 5 lettres.");
             }
         }
     });
-
-
-
-
-
-}
-)
+})
 
 
 
