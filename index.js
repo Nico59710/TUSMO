@@ -98,16 +98,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (motSaisi === motSecret) {
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
-                            cells[j + tentative].style.backgroundColor = "green";
-                        }, 200 * j);
-                    } setTimeout(() => {
-                        console.log("Bravo ! Vous avez trouvé le mot secret.");
-                        alert("Bravo ! Vous avez trouvé le mot secret.");
-                    }, 1000);
-                    setTimeout(() => {
-                        Reset();
-                    }, 2000);
-                    return;
+                    cells[j + tentative].style.backgroundColor = "green";
+                }, 200 * j);
+                }setTimeout(() => {
+                console.log("Bravo ! Vous avez trouvé le mot secret.");
+                alert("Bravo ! Vous avez trouvé le mot secret.");
+                }, 1000);
+                return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
                     setTimeout(() => {
