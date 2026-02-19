@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Mot secret :", motSecret);
     cells[0].textContent = motSecret[0];
 
+    function Reset() {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].textContent = "";
+            cells[i].style.backgroundColor = "transparent";
+        }
+    }
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
         const element = lettres[index];
@@ -49,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 previousCell.textContent = "";
                 currentIndex--;
                 ligneValidee = true;
-
             }
         }
     });
@@ -59,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
     Enter.addEventListener("click", function () {
         verifierMot();
     });
-
 
     //fonction de verification du  mot saisi
     function verifierMot() {
@@ -103,20 +107,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "green";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
-                    cells[i + tentative +5].textContent = motSecret[i];
+                    cells[i + tentative + 5].textContent = motSecret[i];
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "green";
+                        }
+                    });
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "grey";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "grey";
                     }, 200 * i);
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "grey";
+                        }
+                    });
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "yellow";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "yellow";
                     }, 200 * i);
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "yellow";
+                        }
+                    });
                 }
             }
             tentative += 5; // Passer à la ligne suivante
@@ -130,8 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Perdu ! Le mot était : " + motSecret);
             }
         }
-
-
     }
 
     //utilisation du clavier physique
