@@ -101,9 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             for (let i = 0; i < 5; i++) {
+                
                  
                 if (motSecret[i] == motSaisi[i]) {
-                    cells[i + tentative].style.backgroundColor = "green";
+                    setTimeout(() => {
+                    cells[i + tentative-5].style.backgroundColor = "green";
+                     },i* 300);
                     cells[i + tentative + 5].textContent = motSecret[i];
                     lettres.forEach(lettre => {
                         if (lettre.textContent === cells[i + tentative].textContent) {
@@ -111,14 +114,22 @@ document.addEventListener("DOMContentLoaded", function () {
                         } });
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    cells[i + tentative].style.backgroundColor = "grey";
+                    setTimeout(() => {
+
+                    cells[i + tentative-5].style.backgroundColor = "grey";
+                     },i* 300);
+
                       lettres.forEach(lettre => {
                         if (lettre.textContent === cells[i + tentative].textContent) {
                             lettre.style.backgroundColor = "grey";
                         } });
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    cells[i + tentative].style.backgroundColor = "yellow";
+                    setTimeout(() => {
+
+                    cells[i + tentative-5].style.backgroundColor = "yellow";
+                     },i* 300);
+
                       lettres.forEach(lettre => {
                         if (lettre.textContent === cells[i + tentative].textContent) {
                             lettre.style.backgroundColor = "yellow";
