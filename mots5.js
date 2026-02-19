@@ -5,7 +5,7 @@ export const mots5 = [
 "livre","force","amour","ombre","terre","blanc","noire","jaune",
 "rouge","sucre","route","mieux","jouer","grave","geste",
 "bruit","roule","payer","salut","nuage","jambe",
-"comme","entre","cette","etait","apres","paris","aussi","alors","ainsi","ville","notes","trois","monde","année",
+"comme","entre","cette","etait","apres","paris","aussi","alors","ainsi","ville","notes","trois","monde","annee",
 "titre","avant","deces","serie","avoir","temps","avait","place","debut","autre",
 "suite","faire","cours","leurs","album","ligne","moins","forme","grand",
 "selon","genre","situe","ayant","etant","coupe","scene","nomme",
@@ -15,5 +15,5 @@ export const mots5 = [
 "roman","ecole","connu","elles","ecrit","porte","image","ouest",
 "livre","style","union","terme","petit","ligue","passe",
 "frere","donne","duree","films","comte","parmi","japon","objet",
-"cadre","musee","cause"
+"cadre","musee","cause","penis","banjo" 
 ]

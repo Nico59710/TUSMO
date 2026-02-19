@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (e.key == "Enter") {
             verifierMot();
         }
+    }
     });
 })
 
