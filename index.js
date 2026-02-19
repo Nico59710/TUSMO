@@ -58,6 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let i = 0; i < 5; i++) {
                 motSaisi += cells[i + tentative].textContent;
                 console.log("mot saisi:", motSaisi);
+            }
+            if (!mots5.includes(motSaisi.toLowerCase())) {
+                alert("Le mot saisi n'est pas dans la liste des mots autorisés, CONNARD!!");
+
+            }
+            for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
                     cells[i + tentative].style.backgroundColor = "green";
                     console.log("Bravo ! Vous avez trouvé le mot secret.");
@@ -117,28 +123,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 for (let i = 0; i < 5; i++) {
                     motSaisi += cells[i + tentative].textContent;
                     console.log("mot saisi:", motSaisi);
-                    if (motSaisi === motSecret) {
-                        cells[i + tentative].style.backgroundColor = "green";
-                        console.log("Bravo ! Vous avez trouvé le mot secret.");
-                        alert("Bravo ! Vous avez trouvé le mot secret.");
-                    }
-                    else if (motSecret[i] == motSaisi[i]) {
-                        cells[i + tentative].style.backgroundColor = "green";
-                    }
-                    else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                        cells[i + tentative].style.backgroundColor = "grey";
-                    }
-                    else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                        cells[i + tentative].style.backgroundColor = "yellow";
-                    }
                 }
-                tentative += 5; // Passer à la ligne suivante
-                ligneValidee = true;// Réinitialiser pour la prochaine ligne
-                motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
-            } else {
-                alert("Veuillez saisir un mot de 5 lettres.");
+                 if (!mots5.includes(motSaisi.toLowerCase())) {
+                alert("Le mot saisi n'est pas dans la liste des mots autorisés, CONNARD!!");
+
             }
+            for (let i = 0; i < 5; i++) {
+                if (motSaisi === motSecret) {
+                    cells[i + tentative].style.backgroundColor = "green";
+                    console.log("Bravo ! Vous avez trouvé le mot secret.");
+                    alert("Bravo ! Vous avez trouvé le mot secret.");
+                }
+                else if (motSecret[i] == motSaisi[i]) {
+                    cells[i + tentative].style.backgroundColor = "green";
+                }
+                else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
+                    cells[i + tentative].style.backgroundColor = "grey";
+                }
+                else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
+                    cells[i + tentative].style.backgroundColor = "yellow";
+                }
+            }
+            tentative += 5; // Passer à la ligne suivante
+            ligneValidee = true;// Réinitialiser pour la prochaine ligne
+            motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
+        } else {
+            alert("Veuillez saisir un mot de 5 lettres.");
         }
+    }
     });
 })
 
