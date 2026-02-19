@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!previousCell.style.backgroundColor) {
                 previousCell.textContent = "";
                 currentIndex--;
+                ligneValidee = true; 
+
             }
         }
     });
@@ -65,6 +67,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             if (!mots5.includes(motSaisi.toLowerCase())) {
                 alert("Le mot saisi n'est pas dans la liste des mots autorisés, CONNARD!!");
+                cells[currentIndex - 1].textContent = "";
+                cells[currentIndex - 2].textContent = "";
+                cells[currentIndex - 3].textContent = "";
+                cells[currentIndex - 4].textContent = "";
+                cells[currentIndex - 5].textContent = "";
+                cells[currentIndex - 1].style.backgroundColor = "";
+                cells[currentIndex - 2].style.backgroundColor = "";
+                cells[currentIndex - 3].style.backgroundColor = "";
+                cells[currentIndex - 4].style.backgroundColor = "";
+                cells[currentIndex - 5].style.backgroundColor = "";
+                currentIndex -= 5;
+                ligneValidee = true;
+                return;
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
@@ -121,14 +136,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!previousCell.style.backgroundColor) {
                     previousCell.textContent = "";
                     currentIndex--;
+                    ligneValidee = true;
                 }
             }
         } else if (e.key == "Enter") {
             verifierMot();
         }
-    }
+
     });
 })
+
 
 
 
