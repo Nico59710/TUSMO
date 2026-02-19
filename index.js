@@ -84,21 +84,30 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
                     for (let j = 0; j < 5; j++) {
+                        setTimeout(() => {
                     cells[j + tentative].style.backgroundColor = "green";
-                }
+                }, 200 * j);
+                }setTimeout(() => {
                 console.log("Bravo ! Vous avez trouvé le mot secret.");
                 alert("Bravo ! Vous avez trouvé le mot secret.");
+                }, 1000);
                 return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-                    cells[i + tentative].style.backgroundColor = "green";
-                    cells[i + tentative + 5].textContent = motSecret[i];
+                    setTimeout(() => {                        
+                        cells[i + tentative-5].style.backgroundColor = "green";
+                    }, 200 * i);
+                    cells[i + tentative +5].textContent = motSecret[i];
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    cells[i + tentative].style.backgroundColor = "grey";
+                    setTimeout(() => {                        
+                        cells[i + tentative-5].style.backgroundColor = "grey";
+                    }, 200 * i);
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    cells[i + tentative].style.backgroundColor = "yellow";
+                    setTimeout(() => {                        
+                        cells[i + tentative-5].style.backgroundColor = "yellow";
+                    }, 200 * i);
                 }
             }
             tentative += 5; // Passer à la ligne suivante
