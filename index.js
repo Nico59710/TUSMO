@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
 
+    const compteurDiv = document.getElementById("compteurTentatives");
+    let essais = 0;
+    const MAX_ESSAIS = 6;
+
     let currentIndex = 0;
     let ligneValidee = true;
 
@@ -44,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!previousCell.style.backgroundColor) {
                 previousCell.textContent = "";
                 currentIndex--;
-                ligneValidee = true; 
+                ligneValidee = true;
 
             }
         }
@@ -59,7 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //fonction de verification du  mot saisi
     function verifierMot() {
-        if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false && tentative < 25) {
+        if (currentIndex - tentative < 5) {
+            alert("Veuillez saisir un mot de 5 lettres avant de valider.");
+            return;
+        }
+
+        if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false && tentative <= 25) {
             let motSaisi = "";
             for (let i = 0; i < 5; i++) {
                 motSaisi += cells[i + tentative].textContent;
@@ -114,21 +123,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(tentative);
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
+            essais++;
+            compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
+
+            if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
+                alert("Perdu ! Le mot était : " + motSecret);
+            }
         }
-        else if (tentative >= 25) { // Limite de tentatives (6 lignes de 5 lettres)
-            alert("perdu");
-            return;
-        }
-        else {
-            alert("Veuillez saisir un mot de 5 lettres avant de valider.");
-        }
+
+
     }
-
-
-
-
-
-
 
     //utilisation du clavier physique
 
@@ -157,7 +161,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
-})
+
+});
 
 
 
