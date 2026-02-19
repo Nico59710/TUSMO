@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
 
+    const compteurDiv = document.getElementById("compteurTentatives");
+    let essais = 0;
+    const MAX_ESSAIS = 6;
+
     let currentIndex = 0;
     let ligneValidee = true;
 
@@ -23,6 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Mot secret :", motSecret);
     cells[0].textContent = motSecret[0];
 
+    function Reset() {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].textContent = "";
+            cells[i].style.backgroundColor = "transparent";
+        }
+    }
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
         const element = lettres[index];
@@ -44,8 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!previousCell.style.backgroundColor) {
                 previousCell.textContent = "";
                 currentIndex--;
-                ligneValidee = true; 
-
+                ligneValidee = true;
             }
         }
     });
@@ -56,10 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
         verifierMot();
     });
 
-
     //fonction de verification du  mot saisi
     function verifierMot() {
-        if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false && tentative < 25) {
+        if (currentIndex - tentative < 5) {
+            alert("Veuillez saisir un mot de 5 lettres avant de valider.");
+            return;
+        }
+
+        if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false && tentative <= 25) {
             let motSaisi = "";
             for (let i = 0; i < 5; i++) {
                 motSaisi += cells[i + tentative].textContent;
@@ -85,50 +98,61 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (motSaisi === motSecret) {
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
-                    cells[j + tentative].style.backgroundColor = "green";
-                }, 200 * j);
-                }setTimeout(() => {
-                console.log("Bravo ! Vous avez trouvé le mot secret.");
-                alert("Bravo ! Vous avez trouvé le mot secret.");
-                }, 1000);
-                return;
+                            cells[j + tentative].style.backgroundColor = "green";
+                        }, 200 * j);
+                    } setTimeout(() => {
+                        console.log("Bravo ! Vous avez trouvé le mot secret.");
+                        alert("Bravo ! Vous avez trouvé le mot secret.");
+                    }, 1000);
+                    setTimeout(() => {
+                        Reset();
+                    }, 2000);
+                    return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "green";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
-                    cells[i + tentative +5].textContent = motSecret[i];
+                    cells[i + tentative + 5].textContent = motSecret[i];
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "green";
+                        }
+                    });
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "grey";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "grey";
                     }, 200 * i);
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "grey";
+                        }
+                    });
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {                        
-                        cells[i + tentative-5].style.backgroundColor = "yellow";
+                    setTimeout(() => {
+                        cells[i + tentative - 5].style.backgroundColor = "yellow";
                     }, 200 * i);
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "yellow";
+                        }
+                    });
                 }
             }
             tentative += 5; // Passer à la ligne suivante
             console.log(tentative);
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
-        }
-        else if (tentative >= 25) { // Limite de tentatives (6 lignes de 5 lettres)
-            alert("perdu");
-            return;
-        }
-        else {
-            alert("Veuillez saisir un mot de 5 lettres avant de valider.");
+            essais++;
+            compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
+
+            if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
+                alert("Perdu ! Le mot était : " + motSecret);
+            }
         }
     }
-
-
-
-
-
-
 
     //utilisation du clavier physique
 
@@ -157,7 +181,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
-})
+
+});
 
 
 
