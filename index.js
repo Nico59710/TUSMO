@@ -38,9 +38,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //fonction du boutton delete
     Delete.addEventListener("click", function () {
-        cells[currentIndex - 1].textContent = "";
-        currentIndex--;
-    })
+        if (currentIndex > 0) {
+            const previousCell = cells[currentIndex - 1];
+            if (!previousCell.style.backgroundColor) {
+                previousCell.textContent = "";
+                currentIndex--;
+            }
+        }
+    });
+
     //fonction du boutton enter
 
     let tentative = 0; // Variable pour suivre la ligne actuelle
@@ -98,8 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         } else if (e.key == "Backspace") {
-            cells[currentIndex - 1].textContent = "";
-            currentIndex--;
+            if (currentIndex > 0) {
+                const previousCell = cells[currentIndex - 1];
+                if (!previousCell.style.backgroundColor) {
+                    previousCell.textContent = "";
+                    currentIndex--;
+                }
+            }
         } else if (e.key == "Enter") {
             if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false) {
                 let motSaisi = "";
