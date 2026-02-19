@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(mots5);
     const motSecret = mots5[Math.floor(Math.random() * mots5.length)];
     console.log("Mot secret :", motSecret);
+    cells[0].textContent = motSecret[0];
 
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
@@ -49,15 +50,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    //fonction du boutton enter
 
     let tentative = 0; // Variable pour suivre la ligne actuelle
     Enter.addEventListener("click", function () {
         verifierMot();
-        // Ici, la logique pour vérifier le mot saisi par l'utilisateur
     });
 
 
+    //fonction de verification du  mot saisi
     function verifierMot() {
         if (currentIndex % 5 === 0 && currentIndex !== 0 && ligneValidee == false && tentative < 25) {
             let motSaisi = "";
@@ -83,12 +83,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
-                    cells[i + tentative].style.backgroundColor = "green";
-                    console.log("Bravo ! Vous avez trouvé le mot secret.");
-                    alert("Bravo ! Vous avez trouvé le mot secret.");
+                    for (let j = 0; j < 5; j++) {
+                    cells[j + tentative].style.backgroundColor = "green";
+                }
+                console.log("Bravo ! Vous avez trouvé le mot secret.");
+                alert("Bravo ! Vous avez trouvé le mot secret.");
+                return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
                     cells[i + tentative].style.backgroundColor = "green";
+                    cells[i + tentative + 5].textContent = motSecret[i];
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
                     cells[i + tentative].style.backgroundColor = "grey";
@@ -97,8 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     cells[i + tentative].style.backgroundColor = "yellow";
                 }
             }
-            console.log(tentative);
             tentative += 5; // Passer à la ligne suivante
+            console.log(tentative);
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
         }
