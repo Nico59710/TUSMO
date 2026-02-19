@@ -101,16 +101,28 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             for (let i = 0; i < 5; i++) {
-
+                 
                 if (motSecret[i] == motSaisi[i]) {
                     cells[i + tentative].style.backgroundColor = "green";
                     cells[i + tentative + 5].textContent = motSecret[i];
+                    lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "green";
+                        } });
                 }
                 else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
                     cells[i + tentative].style.backgroundColor = "grey";
+                      lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "grey";
+                        } });
                 }
                 else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
                     cells[i + tentative].style.backgroundColor = "yellow";
+                      lettres.forEach(lettre => {
+                        if (lettre.textContent === cells[i + tentative].textContent) {
+                            lettre.style.backgroundColor = "yellow";
+                        } });
                 }
             }
             tentative += 5; // Passer à la ligne suivante
