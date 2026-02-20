@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     let ligneValidee = true;
 
+    function Confettis() {
+        confetti({
+            particleCount: 500,
+            spread: 300,
+        });
+    }
+
     // Affichage du mot secret dans la console
     console.log(mots5);
     let motSecret = mots5[Math.floor(Math.random() * mots5.length)];
@@ -43,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             cells[i].textContent = "";
             cells[i].style.backgroundColor = "";
-            
+
         }
         essais = 0;
         compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
@@ -134,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
+                    Confettis();
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
                             cells[j + tentative].style.backgroundColor = "green";
