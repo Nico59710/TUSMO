@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const victoire = document.getElementById("Victoires");
     const partiesJouees = document.getElementById("partiesJouees");
     const compteurDiv = document.getElementById("compteurTentatives");
-    const resetScore= document.getElementById("resetScore");
+    const resetScore = document.getElementById("resetScore");
     let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
     let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
     victoire.textContent = `Victoires : ${partiesGagnees}`;
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             cells[i].textContent = "";
             cells[i].style.backgroundColor = "";
+            
         }
         essais = 0;
         compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
@@ -59,15 +60,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-resetScore.addEventListener("click", function () {
-    localStorage.removeItem("partiesGagnees");
-    localStorage.removeItem("partiesJouees");
-    partiesGagnees = 0;
-    partiesTotales = 0;
-    victoire.textContent = `Victoires : ${partiesGagnees}`;
-    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
-   
-});
+    resetScore.addEventListener("click", function () {
+        localStorage.removeItem("partiesGagnees");
+        localStorage.removeItem("partiesJouees");
+        partiesGagnees = 0;
+        partiesTotales = 0;
+        victoire.textContent = `Victoires : ${partiesGagnees}`;
+        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+
+    });
 
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
@@ -142,16 +143,16 @@ resetScore.addEventListener("click", function () {
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                         partiesGagnees++;
                         partiesTotales++;
-                        localStorage.setItem("partiesGagnees", partiesGagnees.toString());                        
-                        localStorage.setItem("partiesJouees", partiesTotales.toString());    
+                        localStorage.setItem("partiesGagnees", partiesGagnees.toString());
+                        localStorage.setItem("partiesJouees", partiesTotales.toString());
                         victoire.textContent = `Victoires : ${partiesGagnees}`;
-                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;   
-                        newGame();            
-                    }, 1000);                    
+                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+                        newGame();
+                    }, 1000);
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-                                        
+
                     setTimeout(() => {
                         cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
@@ -191,9 +192,11 @@ resetScore.addEventListener("click", function () {
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
             essais++;
             compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
-            cells[0+tentative].textContent = motSecret[0];
-            
-          
+            if (tentative < 25) {
+                cells[0 + tentative].textContent = motSecret[0];
+            }
+
+
 
             if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
                 alert("Perdu ! Le mot était : " + motSecret);
@@ -201,7 +204,9 @@ resetScore.addEventListener("click", function () {
                 partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
                 localStorage.setItem("partiesJouees", partiesTotales);
                 newGame();
-              
+
+
+
             }
         }
     }
