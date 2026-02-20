@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const Delete = document.getElementById("Delete");
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
+    const resetButton = document.getElementById("reset");
 
     const compteurDiv = document.getElementById("compteurTentatives");
     let essais = 0;
@@ -27,8 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Mot secret :", motSecret);
     cells[0].textContent = motSecret[0];
 
+    resetButton.addEventListener("click", function () {
+        Reset();
+    })
+
     function Reset() {
         for (let i = 0; i < cells.length; i++) {
+
             cells[i].textContent = "";
             cells[i].style.backgroundColor = "transparent";
         }
@@ -65,8 +71,9 @@ document.addEventListener("DOMContentLoaded", function () {
         verifierMot();
     });
 
-    //fonction de verification du  mot saisi
+    //fonction de verification du mot saisi
     function verifierMot() {
+        //verifier que le joueur a saisi un mot de 5 lettres avant de valider
         if (currentIndex - tentative < 5) {
             alert("Veuillez saisir un mot de 5 lettres avant de valider.");
             return;
@@ -98,19 +105,50 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (motSaisi === motSecret) {
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
-                    cells[j + tentative].style.backgroundColor = "green";
-                }, 200 * j);
-                }setTimeout(() => {
-                console.log("Bravo ! Vous avez trouvé le mot secret.");
-                alert("Bravo ! Vous avez trouvé le mot secret.");
-                }, 1000);
-                return;
+                            cells[j + tentative].style.backgroundColor = "green";
+                        }, 200 * j);
+                    } setTimeout(() => {
+                        console.log("Bravo ! Vous avez trouvé le mot secret.");
+                        alert("Bravo ! Vous avez trouvé le mot secret.");
+                    }, 1000);
+                    return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
                     setTimeout(() => {
                         cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
-                    cells[i + tentative + 5].textContent = motSecret[i];
+                    if (tentative === 0) {
+                        cells[i + tentative + 5].textContent = motSecret[i];
+                        cells[i + tentative + 10].textContent = motSecret[i];
+                        cells[i + tentative + 15].textContent = motSecret[i];
+                        cells[i + tentative + 20].textContent = motSecret[i];
+                        cells[i + tentative + 25].textContent = motSecret[i];                        
+                    }else if (tentative === 5) {
+                        cells[i + tentative + 10].textContent = motSecret[i];
+                        cells[i + tentative + 15].textContent = motSecret[i];
+                        cells[i + tentative + 20].textContent = motSecret[i];
+                        cells[i + tentative + 25].textContent = motSecret[i];
+                    } else if (tentative === 10) {
+                        cells[i + tentative + 15].textContent = motSecret[i];
+                        cells[i + tentative + 20].textContent = motSecret[i];
+                        cells[i + tentative + 25].textContent = motSecret[i];
+                    } else if (tentative === 15) {
+                        cells[i + tentative + 20].textContent = motSecret[i];
+                        cells[i + tentative + 25].textContent = motSecret[i];
+                    } else if (tentative === 20) {
+                        cells[i + tentative + 25].textContent = motSecret[i];
+                    }
+
+
+
+
+
+
+
+
+
+
+
                     lettres.forEach(lettre => {
                         if (lettre.textContent === cells[i + tentative].textContent) {
                             lettre.style.backgroundColor = "green";
