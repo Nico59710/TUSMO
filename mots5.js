@@ -15,5 +15,5 @@ export const mots5 = [
 "roman","ecole","connu","elles","ecrit","porte","image","ouest",
 "livre","style","union","terme","petit","ligue","passe",
 "frere","donne","duree","films","comte","parmi","japon","objet",
-"cadre","musee","cause","penis","banjo" 
-]
+"cadre","musee","cause","penis","banjo" ,"barbe","bombe","boute","cable","cacao","cache","cadet","calme","camel","canal","canon",
+"carte","carre","carte"]
