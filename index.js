@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cells[currentIndex - 2].textContent = "";
                 cells[currentIndex - 3].textContent = "";
                 cells[currentIndex - 4].textContent = "";
-                cells[currentIndex - 5].textContent = "";
+                cells[currentIndex - 5].textContent = motSecret[0];
                 cells[currentIndex - 1].style.backgroundColor = "";
                 cells[currentIndex - 2].style.backgroundColor = "";
                 cells[currentIndex - 3].style.backgroundColor = "";
@@ -131,11 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         victoire.textContent = `Victoires : ${partiesGagnees}`;
                         partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;       
                         newGame();            
-                    }, 1000);
-                    
+                    }, 1000);                    
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
+                                        
                     setTimeout(() => {
                         cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
@@ -175,6 +175,9 @@ document.addEventListener("DOMContentLoaded", function () {
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
             essais++;
             compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
+            cells[0+tentative].textContent = motSecret[0];
+            
+          
 
             if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
                 alert("Perdu ! Le mot était : " + motSecret);
