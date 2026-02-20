@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const victoire = document.getElementById("Victoires");
     const partiesJouees = document.getElementById("partiesJouees");
     const compteurDiv = document.getElementById("compteurTentatives");
+    const resetScore= document.getElementById("resetScore");
     let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
     let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
     victoire.textContent = `Victoires : ${partiesGagnees}`;
@@ -57,6 +58,17 @@ document.addEventListener("DOMContentLoaded", function () {
         tentative = 0;
 
     }
+
+resetScore.addEventListener("click", function () {
+    localStorage.removeItem("partiesGagnees");
+    localStorage.removeItem("partiesJouees");
+    partiesGagnees = 0;
+    partiesTotales = 0;
+    victoire.textContent = `Victoires : ${partiesGagnees}`;
+    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+   
+});
+
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
         const element = lettres[index];
