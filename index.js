@@ -14,8 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const Enter = document.getElementById("Enter");
     const cells = document.querySelectorAll(".cell");
     const resetButton = document.getElementById("reset");
-
+    const victoire = document.getElementById("Victoires");
+    const partiesJouees = document.getElementById("partiesJouees");
     const compteurDiv = document.getElementById("compteurTentatives");
+    let partiesGagnees = 0;
+    let partiesTotales = 0;
     let essais = 0;
     const MAX_ESSAIS = 6;
 
@@ -111,6 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                     }, 1000);
+                        partiesGagnees++;
+                        partiesTotales++;
+                        victoire.textContent = `Victoires : ${partiesGagnees}`;
+                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
@@ -122,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         cells[i + tentative + 10].textContent = motSecret[i];
                         cells[i + tentative + 15].textContent = motSecret[i];
                         cells[i + tentative + 20].textContent = motSecret[i];
-                        cells[i + tentative + 25].textContent = motSecret[i];                        
-                    }else if (tentative === 5) {
+                        cells[i + tentative + 25].textContent = motSecret[i];
+                    } else if (tentative === 5) {
                         cells[i + tentative + 10].textContent = motSecret[i];
                         cells[i + tentative + 15].textContent = motSecret[i];
                         cells[i + tentative + 20].textContent = motSecret[i];
@@ -185,6 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
                 alert("Perdu ! Le mot était : " + motSecret);
+                partiesTotales++;
+                partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
             }
         }
     }
