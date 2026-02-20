@@ -141,12 +141,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
-                    Confettis();
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
                             cells[j + tentative].style.backgroundColor = "green";
                         }, 200 * j);
                     } setTimeout(() => {
+                        Confettis();
+                    }, 1000);
+                    setTimeout(() => {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                         partiesGagnees++;
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         victoire.textContent = `Victoires : ${partiesGagnees}`;
                         partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
                         newGame();
-                    }, 1000);
+                    }, 2000);
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
