@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         currentIndex = 0;
         ligneValidee = true;
         tentative = 0;
+        lettresValidees = [null, null, null, null, null];
 
     }
 
@@ -104,11 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+    let lettresValidees = [null, null, null, null, null]; // Tableau pour stocker les lettres déjà validées
     let tentative = 0; // Variable pour suivre la ligne actuelle
     Enter.addEventListener("click", function () {
         verifierMot();
     });
-
     //fonction de verification du mot saisi
     function verifierMot() {
         //verifier que le joueur a saisi un mot de 5 lettres avant de valider
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
-
+                    lettresValidees[i] = motSecret[i]; // Stocker la lettre validée
                     setTimeout(() => {
                         cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
@@ -197,14 +198,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
             tentative += 5; // Passer à la ligne suivante
+            // Afficher les lettres validées dans la ligne suivante
+
+
+            
             console.log(tentative);
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
             essais++;
             compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
-            if (tentative < 25) {
-                cells[0 + tentative].textContent = motSecret[0];
-            }
+            setTimeout(() => {
+                
+                for (let i = 0; i < 5; i++) {
+                    if (lettresValidees[i] !== null) {
+                        cells[tentative + i].textContent = lettresValidees[i];
+                    }
+                }
+                if (tentative < 25) {
+                    cells[0 + tentative].textContent = motSecret[0];
+                }
+            }, 1200);
 
 
 
