@@ -27,20 +27,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Affichage du mot secret dans la console
     console.log(mots5);
-    const motSecret = mots5[Math.floor(Math.random() * mots5.length)];
+    let motSecret = mots5[Math.floor(Math.random() * mots5.length)];
     console.log("Mot secret :", motSecret);
     cells[0].textContent = motSecret[0];
 
     resetButton.addEventListener("click", function () {
-        Reset();
+        newGame();
     })
 
-    function Reset() {
+    function newGame() {
         for (let i = 0; i < cells.length; i++) {
 
             cells[i].textContent = "";
-            cells[i].style.backgroundColor = "transparent";
+            cells[i].style.backgroundColor = "";
         }
+            essais = 0;
+            compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
+            console.log(mots5);
+            motSecret = mots5[Math.floor(Math.random() * mots5.length)];
+            console.log("Mot secret :", motSecret);
+            cells[0].textContent = motSecret[0];
+            lettres.forEach(lettre => {
+                lettre.style.backgroundColor = "";
+            });
+            currentIndex = 0;
+            ligneValidee = true;
+            tentative = 0;
+           
     }
     // Fonction pour gérer les clics sur les lettres du clavier virtuel
     for (let index = 0; index < lettres.length; index++) {
@@ -114,10 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                     }, 1000);
-                        partiesGagnees++;
-                        partiesTotales++;
-                        victoire.textContent = `Victoires : ${partiesGagnees}`;
-                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+                    partiesGagnees++;
+                    partiesTotales++;
+                    victoire.textContent = `Victoires : ${partiesGagnees}`;
+                    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
