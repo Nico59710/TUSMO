@@ -143,12 +143,22 @@ h1 {
     transform: scale(1.01);
 }
 
-#reset {
+#reset,
+#resetScore {
     display: flex;
     color: white;
     margin-top: 20px;
     border-radius: 20px;
     border: solid white 1px;
-    padding: 10px;
+    padding: 10px; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     
+    }
+    
+    #boutonsReset{
+        display: flex;
+        flex-direction: row;
+        gap: 2%;
     }
