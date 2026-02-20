@@ -114,48 +114,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                     }, 1000);
-                        partiesGagnees++;
-                        partiesTotales++;
-                        victoire.textContent = `Victoires : ${partiesGagnees}`;
-                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+                    partiesGagnees++;
+                    partiesTotales++;
+                    victoire.textContent = `Victoires : ${partiesGagnees}`;
+                    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
                     return;
                 }
                 else if (motSecret[i] == motSaisi[i]) {
                     setTimeout(() => {
                         cells[i + tentative - 5].style.backgroundColor = "green";
                     }, 200 * i);
-                    if (tentative === 0) {
-                        cells[i + tentative + 5].textContent = motSecret[i];
-                        cells[i + tentative + 10].textContent = motSecret[i];
-                        cells[i + tentative + 15].textContent = motSecret[i];
-                        cells[i + tentative + 20].textContent = motSecret[i];
-                        cells[i + tentative + 25].textContent = motSecret[i];
-                    } else if (tentative === 5) {
-                        cells[i + tentative + 10].textContent = motSecret[i];
-                        cells[i + tentative + 15].textContent = motSecret[i];
-                        cells[i + tentative + 20].textContent = motSecret[i];
-                        cells[i + tentative + 25].textContent = motSecret[i];
-                    } else if (tentative === 10) {
-                        cells[i + tentative + 15].textContent = motSecret[i];
-                        cells[i + tentative + 20].textContent = motSecret[i];
-                        cells[i + tentative + 25].textContent = motSecret[i];
-                    } else if (tentative === 15) {
-                        cells[i + tentative + 20].textContent = motSecret[i];
-                        cells[i + tentative + 25].textContent = motSecret[i];
-                    } else if (tentative === 20) {
-                        cells[i + tentative + 25].textContent = motSecret[i];
-                    }
-
-
-
-
-
-
-
-
-
-
-
+                    setTimeout(() => {
+                        cells[i + tentative].textContent = motSecret[i];
+                    }, 1200);
                     lettres.forEach(lettre => {
                         if (lettre.textContent === cells[i + tentative].textContent) {
                             lettre.style.backgroundColor = "green";
