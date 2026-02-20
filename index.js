@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const victoire = document.getElementById("Victoires");
     const partiesJouees = document.getElementById("partiesJouees");
     const compteurDiv = document.getElementById("compteurTentatives");
-    let partiesGagnees = 0;
-    let partiesTotales = 0;
+    let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
+    let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
+    victoire.textContent = `Victoires : ${partiesGagnees}`;
+    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
     let essais = 0;
     const MAX_ESSAIS = 6;
 
@@ -128,8 +130,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         alert("Bravo ! Vous avez trouvé le mot secret.");
                         partiesGagnees++;
                         partiesTotales++;
+                        localStorage.setItem("partiesGagnees", partiesGagnees.toString());                        
+                        localStorage.setItem("partiesJouees", partiesTotales.toString());    
                         victoire.textContent = `Victoires : ${partiesGagnees}`;
-                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;       
+                        partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;   
                         newGame();            
                     }, 1000);                    
                     return;
@@ -183,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Perdu ! Le mot était : " + motSecret);
                 partiesTotales++;
                 partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+                localStorage.setItem("partiesJouees", partiesTotales);
                 newGame();
               
             }
