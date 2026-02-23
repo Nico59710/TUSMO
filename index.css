@@ -8,11 +8,13 @@ body {
 
 #ampoule{
     cursor: url("assets/pointer.cur"), pointer;
+    margin-right: 20px;
 
 }
 
 #volume {
     cursor: url("assets/pointer.cur"), pointer;
+    margin-left: 20px;
 
 }
 a,
