@@ -1,5 +1,16 @@
 // Importation du tableau de mots depuis le fichier mots5.js
 import { mots5 } from "./mots5.js";
+import {dico} from "./dico.js";
+
+// Fonction pour enlever les accents et mettre en minuscules
+function enleverAccents(str) {
+    return str
+        .normalize("NFD")                // décompose é -> e +  ́
+        .replace(/[\u0300-\u036f]/g, "") // supprime les accents
+        .replace(/œ/g, "oe")             // optionnel : œ -> oe
+        .replace(/æ/g, "ae")             // optionnel : æ -> ae
+        .toLowerCase();                   // mettre en minuscules
+}
 // Affichage du tableau de mots dans la console pour vérification
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Document Chargé");
@@ -34,6 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
             spread: 300,
         });
     }
+  
+    // Crée un Set normalisé pour comparer rapidement
+const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
     // Affichage du mot secret dans la console
     console.log(mots5);
@@ -124,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 motSaisi += cells[i + tentative].textContent;
                 console.log("mot saisi:", motSaisi);
             }
-            if (!mots5.includes(motSaisi.toLowerCase())) {
-                alert("Le mot saisi n'est pas dans la liste des mots autorisés");
+            if (!dicoSet.has(enleverAccents(motSaisi))) {
+    alert("Le mot saisi n'est pas dans la liste des mots autorisés");
                 cells[currentIndex - 1].textContent = "";
                 cells[currentIndex - 2].textContent = "";
                 cells[currentIndex - 3].textContent = "";
