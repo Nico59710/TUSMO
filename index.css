@@ -10,6 +10,11 @@ body {
     cursor: url("assets/pointer.cur"), pointer;
 
 }
+
+#volume {
+    cursor: url("assets/pointer.cur"), pointer;
+
+}
 a,
 button,
 .button,
