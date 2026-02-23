@@ -8,11 +8,13 @@ body {
 
 #ampoule{
     cursor: url("assets/pointer.cur"), pointer;
+    margin-right: 20px;
 
 }
 
 #volume {
     cursor: url("assets/pointer.cur"), pointer;
+    margin-left: 20px;
 
 }
 a,
@@ -151,6 +153,7 @@ h1 {
     padding: 5px 10px;
     border-radius: 5px;
     margin-right: 10px;
+    box-shadow: 5px 5px black;
 }
 
 .cell {
@@ -242,15 +245,24 @@ h1 {
 #reset,
 #resetScore {
     display: flex;
-    color: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.8);
     margin-top: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
     border: solid white 1px;
     padding: 10px;
     align-items: center;
     justify-content: center;
-    text-align: center;;
+    text-align: center;
+    width: 50%;
+    box-shadow: 5px 5px black;
+}
 
+#reset:hover, #resetScore:hover{
+    transform: scale(1.05);
 }
 
 #resetdark,
@@ -267,11 +279,10 @@ h1 {
 
 }
 
-
 #boutonsReset {
     display: flex;
     flex-direction: row;
-    gap: 2%;
+    gap: 5%;
 }
 
 .boutonsResetdark {
@@ -283,6 +294,7 @@ h1 {
 footer{
     color: white;
     font-size: 0.6rem;
+    margin-top: 5px;
 }
 
 @media (max-width: 768px) {
