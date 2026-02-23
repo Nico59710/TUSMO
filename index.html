@@ -9,12 +9,14 @@
     <script src="https://kit.fontawesome.com/637637e33f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-    <title>Motus</title>
+    <title>Tusmo</title>
 </head>
 
 <body>
+    
     <div id="titre">
         <h1>
+            <div id="ampoule"><i class="fa-regular fa-lightbulb"></i></div>
             <div class="t">T</div>
             <div class="u">U</div>
             <div class="s">S</div>
@@ -23,9 +25,9 @@
         </h1>
     </div>
     <div id="infos">
-    <div id="compteurTentatives">Tentative : 0 / 6</div>
-    <div id="Victoires">Victoires: 0</div>
-    <div id="partiesJouees">Parties jouées: 0</div>
+        <div id="compteurTentatives">Tentative : 0 / 6</div>
+        <div id="Victoires">Victoires: 0</div>
+        <div id="partiesJouees">Parties jouées: 0</div>
     </div>
     <div id="motMystere"></div>
     <div id="grille">
@@ -100,15 +102,18 @@
         </div>
     </div>
     <div id="boutonsReset">
-    <div id="reset">Nouvelle partie</div>
-    <div id="resetScore">Mettre les scores à zéro</div>
+        <div id="reset">Nouvelle partie</div>
+        <div id="resetScore">Mettre les scores à zéro</div>
     </div>
 
 
 
     <footer> &copy; Benaddache Cédric, Monory Yann, Pollet Nicolas - 2026</footer>
     <script type="module" src="index.js"></script>
-    
+
+    <audio id="sonVictoire" src="assets/gagner.mp3"></audio>
+    <audio id="sonPerdu" src="assets/perdu.mp3"></audio>
+    <audio id="sonJingle" src="assets/jingle.mp3"></audio>
 
 </body>
 

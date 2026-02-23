@@ -8,14 +8,14 @@ export const mots5 = [
 "comme","entre","cette","etait","apres","paris","aussi","alors","ainsi","ville","notes","trois","monde","annee",
 "titre","avant","deces","serie","avoir","temps","avait","place","debut","autre",
 "suite","faire","cours","leurs","album","ligne","moins","forme","grand",
-"selon","genre","situe","ayant","etant","coupe","scene","nomme",
+"selon","genre","situe","pomme","etant","coupe","scene","nomme",
 "celle","celui","sorti","ordre","armee","jours","reste","droit","point",
 "prend","siege","effet","toute","match","fille","avril","liste",
 "jeune","texte","route","maire","poste","corps","parti","grace",
 "roman","ecole","connu","elles","ecrit","porte","image","ouest",
 "livre","style","union","terme","petit","ligue","passe",
-"frere","donne","duree","films","comte","parmi","japon","objet",
-"cadre","musee","cause","penis","banjo" ,"barbe","bombe","boute","cable","cacao","cache","cadet","calme","camel","canal","canon",
+"frere","donne","duree","films","comte","parmi","objet",
+"cadre","musee","cause","penis","banjo" ,"barbe","bombe","boule","cable","cacao","cache","cadet","calme","canal","canon",
 "carte","carre","carte","boite","casse","cause","ceint","celui","cerve","chale","champ",
 "change","chant","cheri","chien","chose","cible","clair","clame", "conte","prout","canne","campe","poire","sacre","sauce","serre","pieds","stylo",
-"lampe","lance","large","laver","leche","leger","lente","leste","fruit"] 
+"lampe","lance","large","laver","leche","leger","lente","leste","fruit","poire"] 
