@@ -61,9 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Charger plusieurs fichiers
     async function loadAllSounds() {
         await Promise.all([
-            loadSound("green", "assets/lettreValide.mp3"),
-            loadSound("yellow", "assets/lettreYellow.m4a"),
-            loadSound("grey", "assets/lettreFail.m4a"),
+            loadSound("green", "assets/lettreVerte.mp3"),
+            loadSound("yellow", "assets/lettreJaune.mp3"),
+            loadSound("grey", "assets/lettreGrise.mp3"),
             loadSound("win", "assets/win.m4a")
         ]);
     }
@@ -226,8 +226,8 @@ ampoule.addEventListener("click", function () {
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
-                    sonVictoire.currentTime = 0;
-                    sonVictoire.play();
+                    // sonVictoire.currentTime = 0;
+                    // sonVictoire.play();
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
                             cells[j + tentative].style.backgroundColor = "green";
@@ -236,7 +236,7 @@ ampoule.addEventListener("click", function () {
                     } setTimeout(() => {
                         playSound("win");
                         Confettis();
-                    }, 1500);
+                    }, 1200);
                     setTimeout(() => {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
@@ -282,7 +282,7 @@ ampoule.addEventListener("click", function () {
 
                     cells[i + tentative - 5].style.backgroundColor = resultat[i];
                     playSound(resultat[i]);
-                }, 300 * i);
+                }, 200 * i);
 
             }
             tentative += 5; // Passer à la ligne suivante
