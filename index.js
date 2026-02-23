@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     let ligneValidee = true;
 
+    const sonVictoire = document.getElementById("sonVictoire");
+    const sonPerdu = document.getElementById("sonPerdu");
+    const sonJingle = document.getElementById("sonJingle");
+
     function Confettis() {
         confetti({
             particleCount: 500,
@@ -64,6 +68,11 @@ document.addEventListener("DOMContentLoaded", function () {
     resetButton.addEventListener("click", function () {
         newGame();
     })
+
+    document.addEventListener("keydown", function playOnce() {
+        sonJingle.play();
+        document.removeEventListener("keydown", playOnce);
+    });
 
     function newGame() {
         for (let i = 0; i < cells.length; i++) {
@@ -177,6 +186,8 @@ ampoule.addEventListener("click", function () {
             }
             for (let i = 0; i < 5; i++) {
                 if (motSaisi === motSecret) {
+                    sonVictoire.currentTime = 0;
+                    sonVictoire.play();
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
                             cells[j + tentative].style.backgroundColor = "green";
@@ -252,12 +263,19 @@ ampoule.addEventListener("click", function () {
 
 
             if (essais >= MAX_ESSAIS && motSaisi !== motSecret) {
-                alert("Perdu ! Le mot était : " + motSecret);
-                partiesTotales++;
-                partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
-                localStorage.setItem("partiesJouees", partiesTotales);
-                newGame();
+                setTimeout(() => {
 
+                    sonPerdu.currentTime = 0;
+                    sonPerdu.play()
+                }, 1000);
+
+                setTimeout(() => {
+                    alert("Perdu ! Le mot était : " + motSecret);
+                    partiesTotales++;
+                    partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
+                    localStorage.setItem("partiesJouees", partiesTotales);
+                    newGame();
+                }, 1500);
 
 
             }
