@@ -252,11 +252,13 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
     document.addEventListener("keydown", function (e) {
         console.log(e.key);
-        const allowCharacter = ["a","A","z","Z", "e", "E", "r", "R", "t", "T", "y", "Y", "u", "U", "i", "I", "o", "O", "p", "P", "q", "Q", "s", "S", "d", "D", "f", "F", "g", "G", "h", "H", "j", "J", "k","K","l","L","m","M","w","W","x","X","c","C","v","V","b","B","n","N"]
+        const allowCharacter = ["a","A","z","Z", "e", "E", "r", "R", "t", "T", "y", "Y", "u", "U", "i", "I", "o", "O", "p", "P", "q", "Q", "s", "S", "d", "D", "f", "F", "g", "G", "h", "H", "j", "J", "k","K","l","L","m","M","w","W","x","X","c","C","v","V","b","B","n","N","à","â","ä","á","ã","å","À","Â","Ä","Á","Ã","Å","é","è","ê","ë","ẽ","ė","ē","É","È","Ê","Ë","Ẽ","Ė","Ē","î","ï","í","ì","ĩ","ī","Î","Ï","Í","Ì","Ĩ","Ī","ô","ö","ò","ó","õ","ø","ō","Ô","Ö","Ò","Ó","Õ","Ø","Ō","û","ü","ù","ú","ũ","ū","Û","Ü","Ù","Ú","Ũ","Ū","ÿ","ý","Ÿ","Ý"]
         if (allowCharacter.includes(e.key)) {
             if (currentIndex < cells.length && ligneValidee) {
                 cells[currentIndex].textContent = e.key;
                 cells[currentIndex].textContent = cells[currentIndex].textContent.toLowerCase();
+                cells[currentIndex].textContent = cells[currentIndex].textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Enlever les accents
+
                 currentIndex++;
                 if (currentIndex % 5 === 0) {
                     ligneValidee = false;
