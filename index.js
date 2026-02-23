@@ -30,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const compteurDiv = document.getElementById("compteurTentatives");
     const resetScore = document.getElementById("resetScore");
     const ampoule = document.getElementById("ampoule");
-        const body = document.body;
-        const t = document.querySelectorAll(".t");
-        const o = document.querySelectorAll(".o");
-        const s = document.querySelectorAll(".s");
+    const body = document.body;
+    const t = document.querySelectorAll(".t");
+    const o = document.querySelectorAll(".o");
+    const s = document.querySelectorAll(".s");
+    const volume = document.getElementById("volume");
 
     let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
     let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
@@ -161,17 +162,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-ampoule.addEventListener("click", function () {
-    
-    body.classList.toggle("bodydark");
-    bouttons.forEach(btn => btn.classList.toggle("buttondark"));
-    Enter.classList.toggle("Enterdark");    Delete.classList.toggle("Deletedark");    resetScore.classList.toggle("resetScoredark");    resetButton.classList.toggle("resetdark");     t.classList.toggle("tdark");
-    o.classList.toggle("odark");
-    s.classList.toggle("sdark");
-    lettres.forEach(lettre => {
-        lettre.classList.toggle("lettredark");
+    ampoule.addEventListener("click", function () {
+
+        body.classList.toggle("bodydark");
+        bouttons.forEach(btn => btn.classList.toggle("buttondark"));
+        Enter.classList.toggle("Enterdark"); Delete.classList.toggle("Deletedark"); resetScore.classList.toggle("resetScoredark"); resetButton.classList.toggle("resetdark"); t.classList.toggle("tdark");
+        o.classList.toggle("odark");
+        s.classList.toggle("sdark");
+        lettres.forEach(lettre => {
+            lettre.classList.toggle("lettredark");
+        });
+
     });
-    
+
+    let soundEnabled = true;
+
+volume.addEventListener("click", function () {
+
+    soundEnabled = !soundEnabled;
+
+    if (soundEnabled) {
+        audioCtx.resume();   // réactive tous les sons Web Audio
+    } else {
+        audioCtx.suspend();  // coupe tous les sons Web Audio
+    }
+
+    // Coupe aussi les balises <audio>
+    sonPerdu.muted = !soundEnabled;
+    sonJingle.muted = !soundEnabled;
+    sonVictoire.muted = !soundEnabled;
+
+    volume.textContent = soundEnabled ? "🔊" : "🔇";
 });
 
     //fonction du boutton delete
@@ -275,7 +296,7 @@ ampoule.addEventListener("click", function () {
                 lettres.forEach(lettre => {
                     if (lettre.textContent === cells[i + tentative].textContent) {
                         lettre.style.backgroundColor = resultat[i];
-                       
+
                     }
                 })
                 setTimeout(() => {
