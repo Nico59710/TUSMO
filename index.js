@@ -42,6 +42,46 @@ document.addEventListener("DOMContentLoaded", function () {
     let essais = 0;
     const MAX_ESSAIS = 6;
 
+
+    // Initialiser le contexte audio  
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    document.addEventListener("click", () => {
+        audioCtx.resume();
+    }, { once: true });
+    const sounds = {};
+
+    async function loadSound(name, url) {
+        const response = await fetch(url);
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+        sounds[name] = audioBuffer;
+    }
+
+    // Charger plusieurs fichiers
+    async function loadAllSounds() {
+        await Promise.all([
+            loadSound("green", "assets/lettreValide.mp3"),
+            loadSound("yellow", "assets/lettreYellow.m4a"),
+            loadSound("grey", "assets/lettreFail.m4a"),
+            loadSound("win", "assets/win.m4a")
+        ]);
+    }
+
+    loadAllSounds();
+    // Créer un contexte audio
+    function playSound(name) {
+        const buffer = sounds[name];
+        if (!buffer) return;
+
+        const source = audioCtx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioCtx.destination);
+        source.start(0);
+    }
+
+
+
     let currentIndex = 0;
     let ligneValidee = true;
 
@@ -191,10 +231,12 @@ ampoule.addEventListener("click", function () {
                     for (let j = 0; j < 5; j++) {
                         setTimeout(() => {
                             cells[j + tentative].style.backgroundColor = "green";
+                            playSound("green");
                         }, 200 * j);
                     } setTimeout(() => {
+                        playSound("win");
                         Confettis();
-                    }, 1000);
+                    }, 1500);
                     setTimeout(() => {
                         console.log("Bravo ! Vous avez trouvé le mot secret.");
                         alert("Bravo ! Vous avez trouvé le mot secret.");
@@ -233,12 +275,14 @@ ampoule.addEventListener("click", function () {
                 lettres.forEach(lettre => {
                     if (lettre.textContent === cells[i + tentative].textContent) {
                         lettre.style.backgroundColor = resultat[i];
+                       
                     }
                 })
                 setTimeout(() => {
 
                     cells[i + tentative - 5].style.backgroundColor = resultat[i];
-                }, 200 * i);
+                    playSound(resultat[i]);
+                }, 300 * i);
 
             }
             tentative += 5; // Passer à la ligne suivante
