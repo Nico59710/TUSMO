@@ -154,7 +154,7 @@ h1 {
     padding: 10px;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: center;;
 
 }
 
@@ -166,15 +166,15 @@ h1 {
 
 footer{
     color: white;
-    font-size: smaller;
+    font-size: 0.6rem;
 }
 
 @media (max-width: 768px) {
-body{
-    overflow: hidden;
-}
-    #grille {
-        margin-bottom: 2%;
+
+    #grille{
+        grid-template-columns: repeat(5, 15vw); 
+        grid-template-rows: repeat(6, 15vw);
+        overflow: hidden;
     }
 
     .button:hover {
@@ -189,14 +189,15 @@ body{
     margin-top: 2%;
     padding: 2%;
     font-size: small;
+    gap: 2%;
 
 }
 #infos{
     display: flex;
     position: static;
     font-size: 0.8rem;
-    margin-bottom: 0.5%;
-    padding: 2px 6px;
+    margin-bottom: 3%;
+    gap: 5px;
      align-self: center;
      flex-direction: row;
      justify-content: space-around;
@@ -208,8 +209,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    justify-content: flex-start;
+    margin: 0;
+    height: 100dvh; 
+}
+
+#clavier{
+    height: 12vh;
+    padding-bottom: 5%;
 }
 
 h1{
@@ -218,10 +225,13 @@ h1{
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding-bottom: 5%;
+    padding-top: 5%;
 }
 
  footer {
-    font-size: 0.4rem;;
+    padding-top: 5%;
+    font-size: 0.4rem;
  }
 
 
