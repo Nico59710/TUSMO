@@ -29,6 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const partiesJouees = document.getElementById("partiesJouees");
     const compteurDiv = document.getElementById("compteurTentatives");
     const resetScore = document.getElementById("resetScore");
+    const ampoule = document.getElementById("ampoule");
+        const body = document.body;
+        const t = document.querySelectorAll(".t");
+        const o = document.querySelectorAll(".o");
+        const s = document.querySelectorAll(".s");
+
     let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
     let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
     victoire.textContent = `Victoires : ${partiesGagnees}`;
@@ -105,6 +111,19 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
             }
         });
     }
+
+ampoule.addEventListener("click", function () {
+    
+    body.classList.toggle("bodydark");
+    bouttons.forEach(btn => btn.classList.toggle("buttondark"));
+    Enter.classList.toggle("Enterdark");    Delete.classList.toggle("Deletedark");    resetScore.classList.toggle("resetScoredark");    resetButton.classList.toggle("resetdark");     t.classList.toggle("tdark");
+    o.classList.toggle("odark");
+    s.classList.toggle("sdark");
+    lettres.forEach(lettre => {
+        lettre.classList.toggle("lettredark");
+    });
+    
+});
 
     //fonction du boutton delete
     Delete.addEventListener("click", function () {
