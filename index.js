@@ -1,6 +1,6 @@
 // Importation du tableau de mots depuis le fichier mots5.js
 import { mots5 } from "./mots5.js";
-import {dico} from "./dico.js";
+import { dico } from "./dico.js";
 
 // Fonction pour enlever les accents et mettre en minuscules
 function enleverAccents(str) {
@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
             spread: 300,
         });
     }
-  
+
     // Crée un Set normalisé pour comparer rapidement
-const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
+    const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
     // Affichage du mot secret dans la console
     console.log(mots5);
@@ -126,6 +126,8 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
     });
     //fonction de verification du mot saisi
     function verifierMot() {
+        let motTemp = motSecret.split("");// Tableau temporaire pour suivre les lettres du mot secret
+        let resultat = ["", "", "", "", ""]; // Tableau pour stocker les résultats de validation
         //verifier que le joueur a saisi un mot de 5 lettres avant de valider
         if (currentIndex - tentative < 5) {
             alert("Veuillez saisir un mot de 5 lettres avant de valider.");
@@ -139,7 +141,7 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
                 console.log("mot saisi:", motSaisi);
             }
             if (!dicoSet.has(enleverAccents(motSaisi))) {
-    alert("Le mot saisi n'est pas dans la liste des mots autorisés");
+                alert("Le mot saisi n'est pas dans la liste des mots autorisés");
                 cells[currentIndex - 1].textContent = "";
                 cells[currentIndex - 2].textContent = "";
                 cells[currentIndex - 3].textContent = "";
@@ -176,53 +178,48 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
                     }, 2000);
                     return;
                 }
-                else if (motSecret[i] == motSaisi[i]) {
+                // Première passe : Vérifier les lettres à la bonne position (vert)
+                else if (motSaisi[i] === motSecret[i]) {
                     lettresValidees[i] = motSecret[i]; // Stocker la lettre validée
-                    setTimeout(() => {
-                        cells[i + tentative - 5].style.backgroundColor = "green";
-                    }, 200 * i);
-                    setTimeout(() => {
-                        cells[i + tentative].textContent = motSecret[i];
-                    }, 1200);
-                    lettres.forEach(lettre => {
-                        if (lettre.textContent === cells[i + tentative].textContent) {
-                            lettre.style.backgroundColor = "green";
-                        }
-                    });
-                }
-                else if (motSecret[i] != motSaisi[i] && !motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {
-                        cells[i + tentative - 5].style.backgroundColor = "grey";
-                    }, 200 * i);
-                    lettres.forEach(lettre => {
-                        if (lettre.textContent === cells[i + tentative].textContent) {
-                            lettre.style.backgroundColor = "grey";
-                        }
-                    });
-                }
-                else if (motSecret[i] != motSaisi[i] && motSecret.includes(motSaisi[i])) {
-                    setTimeout(() => {
-                        cells[i + tentative - 5].style.backgroundColor = "yellow";
-                    }, 200 * i);
-                    lettres.forEach(lettre => {
-                        if (lettre.textContent === cells[i + tentative].textContent) {
-                            lettre.style.backgroundColor = "yellow";
-                        }
-                    });
+                    resultat[i] = "green";
+                    motTemp[i] = null; // Marquer la lettre comme utilisée
                 }
             }
+            // Deuxième passe : Vérifier les lettres présentes mais à la mauvaise position (jaune) et les lettres absentes (gris)
+            for (let i = 0; i < 5; i++) {
+                if (resultat[i] === "") { // Si la lettre n'est pas déjà validée en vert
+                    let lettreAVerifier = motTemp.indexOf(motSaisi[i]);//recherche la position de la lettre dans le mot secret 
+                    // (si rien de trouver alors "-1")
+
+                    if (lettreAVerifier !== -1) {// Si la lettre existe dans le mot secret
+                        resultat[i] = "yellow";// Marquer la lettre comme présente mais à la mauvaise position
+                        motTemp[lettreAVerifier] = null; // Marquer la lettre comme utilisée
+                    } else {
+                        resultat[i] = "grey";// Marquer la lettre comme absente du mot secret
+                    }
+                }
+            }
+            for (let i = 0; i < 5; i++) {
+                lettres.forEach(lettre => {
+                    if (lettre.textContent === cells[i + tentative].textContent) {
+                        lettre.style.backgroundColor = resultat[i];
+                    }
+                })
+                setTimeout(() => {
+
+                    cells[i + tentative - 5].style.backgroundColor = resultat[i];
+                }, 200 * i);
+
+            }
             tentative += 5; // Passer à la ligne suivante
-            // Afficher les lettres validées dans la ligne suivante
 
-
-            
-            console.log(tentative);
+            console.log(tentative);// Afficher la tentative actuelle dans la console pour vérification
             ligneValidee = true;// Réinitialiser pour la prochaine ligne
             motSaisi = ""; // Réinitialiser le mot saisi pour la prochaine tentative
             essais++;
             compteurDiv.textContent = `Tentative : ${essais} / ${MAX_ESSAIS}`;
             setTimeout(() => {
-                
+
                 for (let i = 0; i < 5; i++) {
                     if (lettresValidees[i] !== null) {
                         cells[tentative + i].textContent = lettresValidees[i];
@@ -245,6 +242,7 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
 
             }
+
         }
     }
 
@@ -252,7 +250,7 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
     document.addEventListener("keydown", function (e) {
         console.log(e.key);
-        const allowCharacter = ["a","A","z","Z", "e", "E", "r", "R", "t", "T", "y", "Y", "u", "U", "i", "I", "o", "O", "p", "P", "q", "Q", "s", "S", "d", "D", "f", "F", "g", "G", "h", "H", "j", "J", "k","K","l","L","m","M","w","W","x","X","c","C","v","V","b","B","n","N","à","â","ä","á","ã","å","À","Â","Ä","Á","Ã","Å","é","è","ê","ë","ẽ","ė","ē","É","È","Ê","Ë","Ẽ","Ė","Ē","î","ï","í","ì","ĩ","ī","Î","Ï","Í","Ì","Ĩ","Ī","ô","ö","ò","ó","õ","ø","ō","Ô","Ö","Ò","Ó","Õ","Ø","Ō","û","ü","ù","ú","ũ","ū","Û","Ü","Ù","Ú","Ũ","Ū","ÿ","ý","Ÿ","Ý"]
+        const allowCharacter = ["a", "A", "z", "Z", "e", "E", "r", "R", "t", "T", "y", "Y", "u", "U", "i", "I", "o", "O", "p", "P", "q", "Q", "s", "S", "d", "D", "f", "F", "g", "G", "h", "H", "j", "J", "k", "K", "l", "L", "m", "M", "w", "W", "x", "X", "c", "C", "v", "V", "b", "B", "n", "N", "à", "â", "ä", "á", "ã", "å", "À", "Â", "Ä", "Á", "Ã", "Å", "é", "è", "ê", "ë", "ẽ", "ė", "ē", "É", "È", "Ê", "Ë", "Ẽ", "Ė", "Ē", "î", "ï", "í", "ì", "ĩ", "ī", "Î", "Ï", "Í", "Ì", "Ĩ", "Ī", "ô", "ö", "ò", "ó", "õ", "ø", "ō", "Ô", "Ö", "Ò", "Ó", "Õ", "Ø", "Ō", "û", "ü", "ù", "ú", "ũ", "ū", "Û", "Ü", "Ù", "Ú", "Ũ", "Ū", "ÿ", "ý", "Ÿ", "Ý"]
         if (allowCharacter.includes(e.key)) {
             if (currentIndex < cells.length && ligneValidee) {
                 cells[currentIndex].textContent = e.key;
