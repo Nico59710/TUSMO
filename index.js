@@ -252,10 +252,11 @@ const dicoSet = new Set(dico.map(mot => enleverAccents(mot)));
 
     document.addEventListener("keydown", function (e) {
         console.log(e.key);
-        const allowCharacter = ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p", "q", "s", "d", "f", "g", "h", "j", "k", "l", "m", "w", "x", "c", "v", "b", "n"]
+        const allowCharacter = ["a","A","z","Z", "e", "E", "r", "R", "t", "T", "y", "Y", "u", "U", "i", "I", "o", "O", "p", "P", "q", "Q", "s", "S", "d", "D", "f", "F", "g", "G", "h", "H", "j", "J", "k","K","l","L","m","M","w","W","x","X","c","C","v","V","b","B","n","N"]
         if (allowCharacter.includes(e.key)) {
             if (currentIndex < cells.length && ligneValidee) {
                 cells[currentIndex].textContent = e.key;
+                cells[currentIndex].textContent = cells[currentIndex].textContent.toLowerCase();
                 currentIndex++;
                 if (currentIndex % 5 === 0) {
                     ligneValidee = false;
