@@ -38,6 +38,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let partiesGagnees = parseInt(localStorage.getItem("partiesGagnees")) || 0;
     let partiesTotales = parseInt(localStorage.getItem("partiesJouees")) || 0;
+    let sound = localStorage.getItem("sound") === "false" ? false : true;
+    let modeSombre = localStorage.getItem("modeSombre") === "true";
+    if (modeSombre) {
+        body.classList.add("bodydark");
+        bouttons.forEach(btn => btn.classList.add("buttondark"));
+        Enter.classList.add("Enterdark");
+        Delete.classList.add("Deletedark");
+        resetScore.classList.add("resetScoredark");
+        resetButton.classList.add("resetdark");
+
+        t.forEach(el => el.classList.add("tdark"));
+        o.forEach(el => el.classList.add("odark"));
+        s.forEach(el => el.classList.add("sdark"));
+
+        lettres.forEach(lettre => {
+            lettre.classList.add("lettredark");
+        });
+    }
+
+
     victoire.textContent = `Victoires : ${partiesGagnees}`;
     partiesJouees.textContent = `Parties jouées : ${partiesTotales}`;
     let essais = 0;
@@ -166,34 +186,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         body.classList.toggle("bodydark");
         bouttons.forEach(btn => btn.classList.toggle("buttondark"));
-        Enter.classList.toggle("Enterdark"); Delete.classList.toggle("Deletedark"); resetScore.classList.toggle("resetScoredark"); resetButton.classList.toggle("resetdark"); t.classList.toggle("tdark");
-        o.classList.toggle("odark");
-        s.classList.toggle("sdark");
+        Enter.classList.toggle("Enterdark");
+        Delete.classList.toggle("Deletedark");
+        resetScore.classList.toggle("resetScoredark");
+        resetButton.classList.toggle("resetdark");
+        t.forEach(el => el.classList.toggle("tdark"));
+        o.forEach(el => el.classList.toggle("odark"));
+        s.forEach(el => el.classList.toggle("sdark"));;
         lettres.forEach(lettre => {
             lettre.classList.toggle("lettredark");
         });
-
+        const estActif = body.classList.contains("bodydark");
+        localStorage.setItem("modeSombre", estActif);
     });
 
-    let soundEnabled = true;
 
-volume.addEventListener("click", function () {
 
-    soundEnabled = !soundEnabled;
+    let soundEnabled = sound;
+    if (!soundEnabled) {
+    audioCtx.suspend();
+    sonPerdu.muted = true;
+    sonJingle.muted = true;
+    sonVictoire.muted = true;
+    volume.textContent = "🔇";
+} else {
+    volume.textContent = "🔊";
+}
 
-    if (soundEnabled) {
-        audioCtx.resume();   // réactive tous les sons Web Audio
-    } else {
-        audioCtx.suspend();  // coupe tous les sons Web Audio
-    }
+    volume.addEventListener("click", function () {
 
-    // Coupe aussi les balises <audio>
-    sonPerdu.muted = !soundEnabled;
-    sonJingle.muted = !soundEnabled;
-    sonVictoire.muted = !soundEnabled;
+        soundEnabled = !soundEnabled;
 
-    volume.textContent = soundEnabled ? "🔊" : "🔇";
-});
+        if (soundEnabled) {
+            audioCtx.resume();   // réactive tous les sons Web Audio
+        } else {
+            audioCtx.suspend();  // coupe tous les sons Web Audio
+        }
+
+        // Coupe aussi les balises <audio>
+        sonPerdu.muted = !soundEnabled;
+        sonJingle.muted = !soundEnabled;
+        sonVictoire.muted = !soundEnabled;
+
+        volume.textContent = soundEnabled ? "🔊" : "🔇";
+        localStorage.setItem("sound", soundEnabled);
+    });
 
     //fonction du boutton delete
     Delete.addEventListener("click", function () {
