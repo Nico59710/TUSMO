@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function loadAllSounds() {
         await Promise.all([
             loadSound("green", "assets/lettreVerte.mp3"),
-            loadSound("yellow", "assets/lettreJaune.mp3"),
+            loadSound("goldenrod", "assets/lettreJaune.mp3"),
             loadSound("grey", "assets/lettreGrise.mp3"),
             loadSound("win", "assets/win.m4a")
         ]);
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // (si rien de trouver alors "-1")
 
                     if (lettreAVerifier !== -1) {// Si la lettre existe dans le mot secret
-                        resultat[i] = "yellow";// Marquer la lettre comme présente mais à la mauvaise position
+                        resultat[i] = "goldenrod";// Marquer la lettre comme présente mais à la mauvaise position
                         motTemp[lettreAVerifier] = null; // Marquer la lettre comme utilisée
                     } else {
                         resultat[i] = "grey";// Marquer la lettre comme absente du mot secret
